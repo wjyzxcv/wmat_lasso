@@ -30,8 +30,8 @@ ml_lasso_1 = function(dataset, th_tol, max_full_it = 20){
     }
     message("upper bound: ", pl_upper)
     objfun_rcma = function(par) {BIC(penalty_level = par, y = y, n = n ,t = t, th_tol = th_tol, det_mode = "a", max_full_it = max_full_it, ebic_par = ebic_par)}
-    #modify CMAEvolutionStrategy_mod.properties to tune the optimizer
-    cma_obj = cmaNew("./CMAEvolutionStrategy_mod.properties")
+    #you may need to tune the optimizer for better performance
+    cma_obj = cmaNew()
     cmaInit(cma_obj)
     opt_pl = cmaOptimDP(cma_obj, objfun_rcma, isFeasible = function (x) {x>0 & x< pl_upper})
     message(paste0("optimal penalty level: ", opt_pl$bestX))
@@ -56,8 +56,8 @@ ml_lasso_1 = function(dataset, th_tol, max_full_it = 20){
     }
     message("upper bound: ", pl_upper)
     objfun_rcma = function(par) {BIC(penalty_level = par, x = x, y = y, n = n ,t = t, th_tol = th_tol, det_mode = "a", max_full_it = max_full_it, ebic_par = ebic_par)}
-    #modify CMAEvolutionStrategy_mod.properties to tune the optimizer
-    cma_obj = cmaNew("./CMAEvolutionStrategy_mod.properties")
+    #you may need to tune the optimizer for better performance
+    cma_obj = cmaNew()
     cmaInit(cma_obj)
     opt_pl = cmaOptimDP(cma_obj, objfun_rcma, isFeasible = function (x) {x>0 & x< pl_upper})
     message(paste0("optimal penalty level: ", opt_pl$bestX))
